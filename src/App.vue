@@ -1,47 +1,33 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="login-view">
+   
+    <router-view></router-view>
+    
+  </div>
 </template>
 
+<script>
+import LoginForm from './context/Registration/components/LoginForm.vue';
+
+export default {
+  components: {
+    LoginForm
+  },
+  methods: {
+    handleLogin(credentials) {
+      console.log('Inicio de sesión con:', credentials);
+      // Aquí puedes manejar la lógica del login (enviar los datos a una API o hacer alguna validación)
+    }
+  }
+}
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.login-view {
+  width: 100%;
+  max-width: 400px;
+  margin-right: 50px ;
+  padding: 20px;
+  text-align: left;
 }
 </style>
