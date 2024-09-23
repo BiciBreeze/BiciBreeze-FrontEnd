@@ -1,47 +1,85 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div id="app">
+    <header>
+      <nav class="p-mb-4">
+        <Button label="Inicio" icon="pi pi-home" @click="goHome" />
+        <Button label="Perfil" icon="pi pi-user" @click="goToProfile" />
+      </nav>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <main>
+      <router-view />
+    </main>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <footer>
+      <p>© 2024 Bicibreeze. Todos los derechos reservados.</p>
+    </footer>
+  </div>
 </template>
 
-<style scoped>
+<script>
+import {useRouter} from 'vue-router';
+import Button from 'primevue/button'; // Importa el componente Button de PrimeVue
+
+export default {
+  name: 'App',
+  components: {
+    Button // Registra el componente Button
+  },
+  setup() {
+    const router = useRouter();
+
+    const goHome = () => {
+      router.push('/');
+    };
+
+    const goToProfile = () => {
+      router.push('/profile');
+    };
+
+    return {goHome, goToProfile};
+  }
+};
+</script>
+
+<style>
+/* Estilos globales para la aplicación */
+#app {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 header {
-  line-height: 1.5;
+  background-color: #009688;
+  padding: 1rem;
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+nav Button {
+  margin: 0.5rem;
 }
 
-@media (min-width: 1024px) {
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+main {
+  padding: 1rem;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
   header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    padding: 0.5rem;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  nav Button {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 }
 </style>
