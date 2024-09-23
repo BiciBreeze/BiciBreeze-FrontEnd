@@ -21,7 +21,7 @@
   </form>
   <div class="to-login">
     <p>Already have an account?</p>
-    <RouterLink to="/">
+    <RouterLink to="/Login">
       <pv-button class="pv-button-login" type="submit" >Login</pv-button>
     </RouterLink>
   </div>
@@ -116,7 +116,7 @@
 }
 
 .pv-button-register:hover {
-  background-color: rgb(248, 248, 248);
+  background-color: rgba(20, 105, 194, 1);
 }
 
 .pv-button-login {
