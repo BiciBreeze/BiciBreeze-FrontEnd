@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-container">
     <header-registration />
     <form @submit.prevent="submitForm">
       <div class="form-group">
@@ -16,12 +16,12 @@
         <a class="xd1" href="#">Olvidé mi contraseña</a>
         <p class="xd"><a href="#" style="text-decoration: none;">¿No tienes una cuenta?</a></p>
         <RouterLink to="/Register">
-          <button class="regist" type="submit"><b>Registrate</b></button>
+          <button class="regist" type="button"><b>Registrate</b></button>
         </RouterLink>
         <p class="xd"><a href="#" style="text-decoration: none;">O inica sesión con</a></p>
         <div class="hola">
-          <button class="hola1" type="submit"><b>Google</b></button>
-          <button class="hola2" type="submit"><b>Apple</b></button>
+          <button class="hola1" type="button"><b>Google</b></button>
+          <button class="hola2" type="button"><b>Apple</b></button>
         </div>
       </div>
     </form>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 import FooterRegistration from "@/context/Registration/components/footer-registration.component.vue";
 
 export default {
@@ -42,16 +43,33 @@ export default {
       password: ''
     };
   },
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
   methods: {
     submitForm() {
       // Emitimos el evento con los datos del formulario
       this.$emit('login', { email: this.email, password: this.password });
+
+      // Navigate to rent-bike
+      this.router.push('/rent-bike');
     }
   }
 }
 </script>
 
 <style scoped>
+.login-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: left;
+  font-size: 19px;
+  font-family: "Lexend", sans-serif;
+}
+
 .inicio {
   text-align: center;
 }
@@ -59,6 +77,7 @@ export default {
 .form-group {
   margin-bottom: 15px;
 }
+
 input {
   width: 100%;
   padding: 10px;
@@ -66,6 +85,7 @@ input {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+
 button {
   width: 100%;
   padding: 16px;
@@ -76,9 +96,11 @@ button {
   cursor: pointer;
   font-size: 15px;
 }
+
 .options {
   margin-top: 10px;
 }
+
 .options .regist {
   width: 100%;
   padding: 10px;
@@ -89,20 +111,24 @@ button {
   cursor: pointer;
   padding: 16px;
 }
+
 .xd {
   text-align: right;
   font-size: medium;
 }
+
 .xd1 {
   font-size: medium;
   text-decoration: none;
 }
+
 .hola {
   margin-top: 20px;
   display: flex;
   justify-content: flex-start;
   gap: 20px;
 }
+
 .hola1, .hola2 {
   background-color: #c2c2c2;
   color: black;
