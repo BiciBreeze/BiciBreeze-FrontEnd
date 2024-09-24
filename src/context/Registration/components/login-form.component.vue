@@ -15,9 +15,9 @@
       <div class="options">
         <a class="xd1" href="#">Olvidé mi contraseña</a>
         <p class="xd"><a href="#" style="text-decoration: none;">¿No tienes una cuenta?</a></p>
-        <RouterLink to="/Register">
+        <router-link to="/register">
           <button class="regist" type="button"><b>Registrate</b></button>
-        </RouterLink>
+        </router-link>
         <p class="xd"><a href="#" style="text-decoration: none;">O inica sesión con</a></p>
         <div class="hola">
           <button class="hola1" type="button"><b>Google</b></button>
@@ -31,32 +31,32 @@
 
 <script>
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { login } from '@/auth';
 import FooterRegistration from "@/context/Registration/components/footer-registration.component.vue";
 
 export default {
   components: {
     FooterRegistration
   },
-  data() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
   setup() {
     const router = useRouter();
-    return { router };
-  },
-  methods: {
-    submitForm() {
-      // Emitimos el evento con los datos del formulario
-      this.$emit('login', { email: this.email, password: this.password });
+    const email = ref('');
+    const password = ref('');
 
-      // Navigate to rent-bike
-      this.router.push('/rent-bike');
-    }
+    const submitForm = () => {
+      // Simulate login success
+      login();
+      router.push('/home');
+    };
+
+    return {
+      email,
+      password,
+      submitForm
+    };
   }
-}
+};
 </script>
 
 <style scoped>
