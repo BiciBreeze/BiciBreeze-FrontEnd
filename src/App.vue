@@ -1,6 +1,6 @@
 <template>
-  <HeaderComponent></HeaderComponent>
-  <hr>
+  <header-registration />
+
   <div class="login-view">
    
     <router-view></router-view>
@@ -9,14 +9,13 @@
 </template>
 
 <script>
-import HeaderComponent from './context/Registration/components/HeaderComponent.vue';
-import LoginForm from './context/Registration/components/LoginForm.vue';
+import LoginForm from './context/Registration/components/login-form.component.vue';
+import HeaderRegistration from './context/Registration/components/header-registration.component.vue';
 
 export default {
   components: {
     LoginForm,
-    HeaderComponent,
-    
+    HeaderRegistration,
   },
   methods: {
     handleLogin(credentials) {
