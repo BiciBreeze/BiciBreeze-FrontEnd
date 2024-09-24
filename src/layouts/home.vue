@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4 mt-1">
+  <div class="container mx-auto p-4 mt-40">
     <div class="text-center">
       <h1 class="text-3xl font-bold mb-2">Welcome to Bikeshare</h1>
       <p class="text-lg text-gray-600 mb-4">Where would you like to go?</p>
@@ -37,7 +37,9 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold">Reserve a bike</button>
+      <router-link to="/bookings">
+        <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold">Reserve a bike</button>
+      </router-link>
     </div>
   </div>
 </template>
