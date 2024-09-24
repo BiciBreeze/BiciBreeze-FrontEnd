@@ -1,51 +1,42 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div class="form-container">
-      <h2>Register</h2>
-      <div class="form-group">
-        <label for="email">Email: </label>
-        <pv-input-text type="email" v-model="email" placeholder="example@email.com" required />
+  <div>
+    <form @submit.prevent="submitForm">
+      <div class="form-container">
+        <h2>Register</h2>
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <pv-input-text type="email" v-model="email" placeholder="example@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password: </label>
+          <pv-input-text type="password" v-model="password" placeholder="**********" required/>
+        </div>
+        <div class="form-group">
+          <label for="password">Confirm Password: </label>
+          <pv-input-text type="password" v-model="confirmPassword" placeholder="**********" required/>
+        </div>
+        <RouterLink to="/Login">
+          <pv-button class="pv-button-register" :disabled="!isFormValid" @click="submitForm" type="submit">Register</pv-button>
+        </RouterLink>
       </div>
-      <div class="form-group">
-        <label for="password">Password: </label>
-        <pv-input-text type="password" v-model="password" placeholder="**********" required/>
-      </div>
-      <div class="form-group">
-        <label for="password">Confirm Password: </label>
-        <pv-input-text type="password" v-model="confirmPassword" placeholder="**********" required/>
-      </div>
+    </form>
+    <div class="to-login">
+      <p>Already have an account?</p>
       <RouterLink to="/Login">
-        <pv-button class="pv-button-register" :disabled="!isFormValid" @click="submitForm" type="submit">Register</pv-button>
+        <pv-button class="pv-button-login" type="submit">Login</pv-button>
       </RouterLink>
     </div>
-  </form>
-  <div class="to-login">
-    <p>Already have an account?</p>
-    <RouterLink to="/Login">
-      <pv-button class="pv-button-login" type="submit" >Login</pv-button>
-    </RouterLink>
-  </div>
-
-  <div class="mini-footer">
-    <div class="footer-links">
-      <a href="#">About</a>
-      <a href="#">FAQ</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Terms and Conditions</a>
-    </div>
-    <div class="social-icons">
-      <img src="" alt="Facebook" />
-      <img src="" alt="Twitter" />
-      <img src="" alt="Instagram" />
-    </div>
-    <div class="footer-copy">
-      <p>&copy; 2023 BiciBreeze</p>
-  </div>
+    <footer-registration />
   </div>
 </template>
-  
-  <script>
-  export default {
+
+<script>
+import FooterRegistration from "@/context/Registration/components/footer-registration.component.vue";
+
+export default {
+  components: {
+    FooterRegistration
+  },
   data() {
     return {
       email: '',
@@ -53,24 +44,20 @@
       confirmPassword: ''
     };
   },
-
-    computed: {
-      isFormValid() {
-        return this.email && this.password && this.confirmPassword;
-      }
-    },
-
+  computed: {
+    isFormValid() {
+      return this.email && this.password && this.confirmPassword;
+    }
+  },
   methods: {
     submitForm() {
-      // Emitimos el evento con los datos del formulario
       this.$emit('login', { email: this.email, password: this.password, confirmPassword: this.confirmPassword });
     }
   }
-  }
-  </script>
-  
-  <style scoped>
+}
+</script>
 
+<style scoped>
 .form-container {
   display: flex;
   flex-direction: column;
@@ -79,7 +66,6 @@
   width: 100%;
   margin: auto;
   font-family: "Lexend", sans-serif;
-
 }
 
 .form-group {
@@ -96,7 +82,7 @@
   margin-bottom: 5px;
 }
 
-.to-login{
+.to-login {
   display: flex;
   flex-direction: column;
   font-family: "Lexend", sans-serif;
@@ -105,7 +91,7 @@
 }
 
 .to-login p {
-  color: rgba(79, 115, 150, 1)
+  color: rgba(79, 115, 150, 1);
 }
 
 .pv-button-register {
@@ -126,43 +112,7 @@
   border: none;
 }
 
-.pv-button-register:hover {
+.pv-button-login:hover {
   background-color: rgba(20, 105, 194, 1);
 }
-
-.mini-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 60px;
-  font-family: "Lexend", sans-serif;
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 15px;
-}
-
-.footer-links a {
-  text-decoration: none;
-  color: rgba(79, 115, 150, 1);
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5px;
-  color: rgba(79, 115, 150, 1);
-}
-
-.footer-copy {
-  color: rgba(79, 115, 150, 1);
-  font-weight: bold;
-}
-
-  </style>
-  
+</style>
