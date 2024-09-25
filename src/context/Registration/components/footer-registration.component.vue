@@ -18,6 +18,7 @@
     </div>
     <div class="footer-copy">
       <p>&copy; 2024 BiciBreeze</p>
+      
     </div>
   </div>
 </template>
