@@ -6,10 +6,10 @@
     <!-- Contenedor de la configuración -->
     <div class="config-container min-h-screen flex align-items-center justify-content-center">
       <div class="surface-card p-4 shadow-2 border-round w-full lg:w-8">
-        <h1 class="text-3xl font-bold mb-4">Configuración</h1>
+        <h1 class="text-3xl font-bold mb-4">Configuration</h1>
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Perfil</h2>
+          <h2 class="text-xl font-semibold mb-3">Profile</h2>
           <div class="flex align-items-center mb-3">
             <Avatar :image="config.avatar || 'https://www.apple.com/leadership/images/bio/tim-cook_image.png.og.png?1724088613210'" size="xlarge" shape="circle" class="mr-3" />
             <div class="flex-1">
@@ -22,16 +22,16 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Apariencia</h2>
+          <h2 class="text-xl font-semibold mb-3">Appearance</h2>
           <div class="flex align-items-center justify-content-between mb-3">
             <div class="flex align-items-center">
               <i :class="['pi', config.darkMode ? 'pi-moon' : 'pi-sun', 'mr-2']"></i>
-              <label for="dark-mode">Modo oscuro</label>
+              <label for="dark-mode">Dark Mode</label>
             </div>
             <InputSwitch v-model="config.darkMode" inputId="dark-mode" />
           </div>
           <div class="mb-3">
-            <label for="language" class="block mb-2">Idioma</label>
+            <label for="language" class="block mb-2">Language</label>
             <Dropdown v-model="config.language" :options="languageOptions" optionLabel="name" optionValue="code" placeholder="Selecciona un idioma" class="w-full" />
           </div>
         </div>
@@ -39,15 +39,15 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Privacidad</h2>
+          <h2 class="text-xl font-semibold mb-3">Privacy</h2>
           <div class="mb-3">
-            <label for="privacy" class="block mb-2">Nivel de privacidad</label>
+            <label for="privacy" class="block mb-2">Privacy level</label>
             <Dropdown v-model="config.privacyLevel" :options="privacyOptions" optionLabel="name" optionValue="value" placeholder="Selecciona nivel de privacidad" class="w-full" />
           </div>
           <div class="flex align-items-center justify-content-between">
             <div class="flex align-items-center">
               <i class="pi pi-eye mr-2"></i>
-              <label for="activity-visibility">Visibilidad de actividad</label>
+              <label for="activity-visibility">Visibility of activity</label>
             </div>
             <InputSwitch v-model="activityVisibility" inputId="activity-visibility" />
           </div>
@@ -56,7 +56,7 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Notificaciones</h2>
+          <h2 class="text-xl font-semibold mb-3">Notifications</h2>
           <div class="flex align-items-center justify-content-between mb-3">
             <div class="flex align-items-center">
               <i class="pi pi-bell mr-2"></i>
@@ -67,7 +67,7 @@
           <div class="flex align-items-center justify-content-between">
             <div class="flex align-items-center">
               <i class="pi pi-envelope mr-2"></i>
-              <label for="email-notifications">Notificaciones por email</label>
+              <label for="email-notifications">Email notifications</label>
             </div>
             <InputSwitch v-model="config.notifications.email" inputId="email-notifications" />
           </div>
@@ -76,11 +76,11 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Seguridad</h2>
+          <h2 class="text-xl font-semibold mb-3">Security</h2>
           <div class="flex align-items-center justify-content-between mb-3">
             <div class="flex align-items-center">
               <i class="pi pi-lock mr-2"></i>
-              <label for="two-factor">Autenticación de dos factores</label>
+              <label for="two-factor">Two-factor authentication</label>
             </div>
             <InputSwitch v-model="config.twoFactor" inputId="two-factor" />
           </div>
@@ -90,9 +90,9 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Accesibilidad</h2>
+          <h2 class="text-xl font-semibold mb-3">Accessibility</h2>
           <div class="mb-3">
-            <label for="font-size" class="block mb-2">Tamaño de fuente: {{ config.fontSize }}px</label>
+            <label for="font-size" class="block mb-2">Font size: {{ config.fontSize }}px</label>
             <Slider v-model="config.fontSize" :min="12" :max="24" class="w-full" />
           </div>
         </div>
@@ -100,11 +100,11 @@
         <Divider />
 
         <div class="mb-5">
-          <h2 class="text-xl font-semibold mb-3">Integraciones</h2>
+          <h2 class="text-xl font-semibold mb-3">Integrations</h2>
           <div class="flex align-items-center justify-content-between mb-3" v-for="platform in socialPlatforms" :key="platform.name">
             <div class="flex align-items-center">
               <i :class="['pi', platform.icon, 'mr-2']"></i>
-              <label :for="`${platform.name}-integration`">Conectar con {{ platform.label }}</label>
+              <label :for="`${platform.name}-integration`">Connect with {{ platform.label }}</label>
             </div>
             <InputSwitch v-model="config.socialConnections[platform.name]" :inputId="`${platform.name}-integration`" @change="handleSocialConnection(platform.name)" />
           </div>
@@ -156,9 +156,9 @@ const languageOptions = [
 ];
 
 const privacyOptions = [
-  { name: 'Público', value: 'public' },
-  { name: 'Solo amigos', value: 'friends' },
-  { name: 'Privado', value: 'private' },
+  { name: 'Públic', value: 'public' },
+  { name: 'Friens Only', value: 'friends' },
+  { name: 'Privade', value: 'private' },
 ];
 
 const socialPlatforms = [

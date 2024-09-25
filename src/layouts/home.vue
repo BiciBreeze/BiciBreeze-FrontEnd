@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto p-4 mt-40">
     <div class="text-center">
-      <h1 class="text-3xl font-bold mb-2">Welcome to Bikeshare</h1>
+      <h1 class="text-3xl font-bold mb-2">Welcome to BiciBreeze</h1>
       <p class="text-lg text-gray-600 mb-4">Where would you like to go?</p>
     </div>
     <div class="relative mb-8">

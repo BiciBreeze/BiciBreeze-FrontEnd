@@ -1,17 +1,17 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
     <div class="max-w-4xl w-full space-y-8">
-      <h1 class="text-4xl font-bold text-center text-gray-900">Elige tu plan</h1>
+      <h1 class="text-4xl font-bold text-center text-gray-900">Choose Your Plan</h1>
 
       <div class="flex justify-center items-center space-x-4 mb-8">
-        <span :class="{ 'font-bold': !isAnnual }">Mensual</span>
+        <span :class="{ 'font-bold': !isAnnual }">Monthly</span>
         <!-- PrimeVue Checkbox Switch -->
         <pv-Checkbox v-model="isAnnual" binary class="p-d-flex p-ai-center">
           <template #checkicon>
             <span class="slider round"></span>
           </template>
         </pv-Checkbox>
-        <span :class="{ 'font-bold': isAnnual }">Anual</span>
+        <span :class="{ 'font-bold': isAnnual }">Annual</span>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
@@ -26,7 +26,7 @@
             <p class="text-gray-600 mb-6">{{ plan.description }}</p>
             <div class="text-4xl font-bold text-gray-900 mb-6">
               {{ isAnnual ? plan.annualPrice : plan.monthlyPrice }}
-              <span class="text-lg font-normal text-gray-600">/{{ isAnnual ? 'año' : 'mes' }}</span>
+              <span class="text-lg font-normal text-gray-600">/{{ isAnnual ? 'year' : 'month' }}</span>
             </div>
             <ul class="space-y-4 mb-8">
               <li v-for="feature in plan.features" :key="feature" class="flex items-center">
@@ -38,12 +38,12 @@
             <!-- PrimeVue Button -->
 
             <pv-button
-                label="Suscribirse"
+                label="Subscribe"
                 class="w-full bg-blue-500 text-white rounded-full py-3 font-bold hover:bg-blue-600 transition duration-300"
                 @click="openDialog"
             ></pv-button>
 
-            <Dialog v-model:visible="isDialogVisible" header="Formulario de Pago" :modal="true" :closable="true" :style="{ width: '50vw' }">
+            <Dialog v-model:visible="isDialogVisible" header="Payment Form" :modal="true" :closable="true" :style="{ width: '50vw' }">
               <paymentmethods />
             </Dialog>
           </div>
@@ -66,26 +66,26 @@ const isAnnual = ref(false)
 
 const plans = [
   {
-    name: 'Básico',
-    description: 'Perfecto para empezar',
+    name: 'Basic',
+    description: 'Perfect for getting started',
     monthlyPrice: '€9.99',
     annualPrice: '€99.99',
     features: [
-      'Acceso a contenido básico',
-      'Soporte por email',
-      'Actualizaciones mensuales'
+      'Access to basic content',
+      'Email support',
+      'Monthly updates'
     ]
   },
   {
     name: 'Pro',
-    description: 'Para usuarios avanzados',
+    description: 'For advanced users',
     monthlyPrice: '€19.99',
     annualPrice: '€199.99',
     features: [
-      'Todo lo del plan Básico',
-      'Contenido premium',
-      'Soporte prioritario 24/7',
-      'Acceso anticipado a nuevas funciones'
+      'Everything in the Basic plan',
+      'Premium content',
+      'Priority 24/7 support',
+      'Early access to new features'
     ],
     recommended: true
   }
