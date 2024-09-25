@@ -12,7 +12,7 @@ import Dropdown from 'primevue/dropdown';
 import AccordionTab from 'primevue/accordiontab';
 import Toast from 'primevue/toast';
 import Accordion from 'primevue/accordion';
-import Checkbox from "primevue/checkbox";
+import Checkbox from 'primevue/checkbox';
 import RadioButton from "primevue/radiobutton";
 
 import 'primeicons/primeicons.css'; // Importación de primeicons
@@ -31,6 +31,7 @@ export default (app) => {
 
     app.use(ToastService);
     app.directive('tooltip', Tooltip);
+
 
     app.component('pv-input-text', InputText);
     app.component('pv-button', Button);
