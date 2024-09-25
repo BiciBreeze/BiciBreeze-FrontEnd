@@ -36,11 +36,16 @@
               </li>
             </ul>
             <!-- PrimeVue Button -->
+
             <pv-button
                 label="Suscribirse"
                 class="w-full bg-blue-500 text-white rounded-full py-3 font-bold hover:bg-blue-600 transition duration-300"
-                @click="subscribe(plan)"
+                @click="openDialog"
             ></pv-button>
+
+            <Dialog v-model:visible="isDialogVisible" header="Formulario de Pago" :modal="true" :closable="true" :style="{ width: '50vw' }">
+              <paymentmethods />
+            </Dialog>
           </div>
         </div>
       </div>
@@ -50,9 +55,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import Dialog from 'primevue/dialog'
+import paymentmethods from './paymentmethods.vue'
+const isDialogVisible = ref(false)
 
-
-
+const openDialog = () => {
+  isDialogVisible.value = true
+}
 const isAnnual = ref(false)
 
 const plans = [
