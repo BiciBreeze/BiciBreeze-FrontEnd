@@ -71,6 +71,8 @@ import { isLoggedIn } from '@/auth';
 const navigation = [
   { name: 'Home', href: '/home', current: true },
   { name: 'Bookings', href: '/bookings', current: false },
+  { name: 'Subscription', href: '/subscription', current: false },
+
 ];
 </script>
 
