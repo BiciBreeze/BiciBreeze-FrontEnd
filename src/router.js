@@ -1,18 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import UserProfile from './user-profile/components/user-profile.component.vue';
-const routes = [
+import { createRouter, createWebHistory } from "vue-router";
+import UserProfile from '@/user-profile/components/user-profile.component.vue';
 
+const routes = [
     {
-        path: '/profile',
-        name: 'UserProfile',
-        component: UserProfile
-    }
-    // puedes agregar más rutas aquí
+        path: "/",
+        name: "UserProfile",
+        component: UserProfile,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 export default router;
