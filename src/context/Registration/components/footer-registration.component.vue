@@ -17,7 +17,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram" />
     </div>
     <div class="footer-copy">
-      <p>&copy; 2023 BiciBreeze</p>
+      <p>&copy; 2024 BiciBreeze</p>
     </div>
   </div>
 </template>
