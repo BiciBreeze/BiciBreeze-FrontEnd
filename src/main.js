@@ -11,12 +11,15 @@ import setupPrimeVue from './primevue-components'
 
 import 'animate.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import {createPinia} from "pinia";
 
 
 const app = createApp(App)
+const pinia = createPinia();
 
 setupPrimeVue(app)
 
+app.use(pinia);
 
 app.use(router)
 

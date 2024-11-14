@@ -6,15 +6,17 @@ import RegisterForm from './context/Registration/components/register-form.compon
 import Subscription from './context/Subscription/components/subscription.vue';
 import UserProfile from './context/user-profile/components/userProfile.vue';
 import Config from './layouts/config.vue';
+import {authenticationGuard} from "@/context/iam/services/authentication.guard.js";
 
 const routes = [
-  { path: '/', component: LoginForm },
-  { path: '/home', component: Home },
-  { path: '/bookings', component: RentBike },
-  { path: '/register', component: RegisterForm },
-  {path: '/subscription', component: Subscription},
-  {path: '/user-profile', component: UserProfile},
-  {path: '/settings', component: Config}
+  { path: '/', redirect: '/login' }, // Default route redirection
+  { path: '/login', name:'sign-in', component: LoginForm },
+  { path: '/home', name:'home', component: Home, beforeEnter: authenticationGuard },
+  { path: '/bookings', component: RentBike, beforeEnter: authenticationGuard },
+  { path: '/register', name:'sign-up', component: RegisterForm },
+  { path: '/subscription', component: Subscription, beforeEnter: authenticationGuard },
+  { path: '/user-profile', component: UserProfile, beforeEnter: authenticationGuard },
+  { path: '/settings', component: Config, beforeEnter: authenticationGuard }
 ];
 
 const router = createRouter({
