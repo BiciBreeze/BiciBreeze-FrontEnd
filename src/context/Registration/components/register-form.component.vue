@@ -1,22 +1,22 @@
 <template>
   <div>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onSignUp">
       <div class="form-container">
         <h2>Register</h2>
         <div class="form-group">
           <label for="email">Email: </label>
-          <pv-input-text type="email" v-model="email" placeholder="example@email.com" required />
+          <pv-input-text type="email" v-model="username" placeholder="example@email.com" required />
         </div>
         <div class="form-group">
           <label for="password">Password: </label>
           <pv-input-text type="password" v-model="password" placeholder="**********" required/>
         </div>
-        <div class="form-group">
+     <div class="form-group">
           <label for="password">Confirm Password: </label>
           <pv-input-text type="password" v-model="confirmPassword" placeholder="**********" required/>
         </div>
         <RouterLink to="/Login">
-          <pv-button class="pv-button-register" :disabled="!isFormValid" @click="submitForm" type="submit">Register</pv-button>
+          <pv-button class="pv-button-register" :disabled="!isFormValid" @click="onSignUp" type="submit">Register</pv-button>
         </RouterLink>
       </div>
     </form>
@@ -32,26 +32,31 @@
 
 <script>
 import FooterRegistration from "@/context/Registration/components/footer-registration.component.vue";
+import { useAuthenticationStore } from "@/context/iam/services/authentication.store.js";
+import { SignUpRequest } from "@/context/iam/model/sign-up.request.js";
 
 export default {
-  components: {
-    FooterRegistration
-  },
+  name: "sign-up",
   data() {
     return {
-      email: '',
+      username: '',
       password: '',
       confirmPassword: ''
     };
   },
+  components: {
+    FooterRegistration
+  },
   computed: {
     isFormValid() {
-      return this.email && this.password && this.confirmPassword;
+      return this.username && this.password && this.confirmPassword;
     }
   },
   methods: {
-    submitForm() {
-      this.$emit('login', { email: this.email, password: this.password, confirmPassword: this.confirmPassword });
+    onSignUp() {
+      let authenticationStore = useAuthenticationStore();
+      let signUpRequest = new SignUpRequest(this.username, this.password);
+      authenticationStore.signUp(signUpRequest, this.$router);
     }
   }
 }

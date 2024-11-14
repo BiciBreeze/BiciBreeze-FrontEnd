@@ -1,15 +1,17 @@
 <template>
   <div class="login-container">
     <header-registration />
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onSignIn">
       <div class="form-group">
         <h2 class="inicio">Inicia sesión</h2>
         <label for="email">Correo electrónico</label>
-        <input type="email" v-model="email" placeholder="ejemplo@universidad.com" required />
+        <input type="email" v-model="username" placeholder="ejemplo@universidad.com" required :class="{'p-invalid': !username}"/>
+        <small v-if="!username" class="p-invalid">Por favor, ingrese su correo electrónico</small>
       </div>
       <div class="form-group">
         <label for="password">Contraseña</label>
-        <input type="password" v-model="password" placeholder="******" required />
+        <input type="password" v-model="password" placeholder="******" required :class="{'p-invalid': !password}"  />
+        <small v-if="!password" class="p-invalid">Por favor, ingrese su contraseña</small>
       </div>
       <button type="submit"><b>Iniciar Sesión</b></button>
       <div class="options">
@@ -31,32 +33,33 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import { login } from '@/auth';
 import FooterRegistration from "@/context/Registration/components/footer-registration.component.vue";
+import {useAuthenticationStore} from "@/context/iam/services/authentication.store.js";
+import {SignInRequest} from "@/context/iam/model/sign-in.request.js";
 
 export default {
+  name: "sign-in",
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
   components: {
     FooterRegistration
   },
   setup() {
     const router = useRouter();
-    const email = ref('');
-    const password = ref('');
-
-    const submitForm = () => {
-      // Simulate login success
-      login();
-      router.push('/home');
-    };
-
-    return {
-      email,
-      password,
-      submitForm
-    };
+  },
+  methods: {
+    onSignIn() {
+      let authenticationStore = useAuthenticationStore();
+      let signInRequest = new SignInRequest(this.username, this.password);
+      authenticationStore.signIn(signInRequest, this.$router);
+    }
   }
-};
+}
+
 </script>
 
 <style scoped>
