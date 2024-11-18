@@ -64,15 +64,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { isLoggedIn } from '@/auth';
+import { useAuthenticationStore } from '@/context/iam/services/authentication.store.js';
 
 const navigation = [
   { name: 'Home', href: '/home', current: true },
   { name: 'Bookings', href: '/bookings', current: false },
   { name: 'Subscription', href: '/subscription', current: false },
 ];
+
+const store = useAuthenticationStore();
+const isLoggedIn = ref(store.isSignedIn);
+
+watch(() => store.isSignedIn, (newVal) => {
+  isLoggedIn.value = newVal;
+});
 </script>
 
 <style scoped>
