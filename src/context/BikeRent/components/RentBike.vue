@@ -129,7 +129,6 @@
     </Dialog>
   </div>
 </template>
-
 <script setup>
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
@@ -141,7 +140,6 @@ const showPolicies = ref(false);
 const showOperating = ref(false);
 const showLocations = ref(false);
 
-// Options for bike types
 const bikeTypes = [
   { value: 'electric', label: 'Electric Bike' },
   { value: 'mountain', label: 'Mountain Bike' },
@@ -149,13 +147,11 @@ const bikeTypes = [
   { value: 'road', label: 'Road Bike' }
 ];
 
-// Options for time slots
 const timeSlots = Array.from({ length: 24 }, (_, i) => {
   const hour = i.toString().padStart(2, '0');
   return { label: `${hour}:00`, value: `${hour}:00` };
 });
 
-// Form state
 const bikeType = ref(null);
 const pickupDate = ref(null);
 const dropoffDate = ref(null);
@@ -163,9 +159,7 @@ const pickupTime = ref(null);
 const dropoffTime = ref(null);
 const phoneNumber = ref('');
 
-// Handle form submission
 const handleSubmit = async () => {
-  console.log("Form submitted");
   if (!bikeType.value || !pickupDate.value || !pickupTime.value || !dropoffDate.value || !dropoffTime.value) {
     toast.add({ severity: 'error', summary: 'Invalid Input', detail: 'Please select valid bike type, dates, and times.', life: 3000 });
     return;
@@ -180,14 +174,10 @@ const handleSubmit = async () => {
       phoneNumber.value
   );
 
-  console.log("Rental request:", rentalRequest);
-
   try {
     const response = await RentService.createRental(rentalRequest);
-    console.log("Response:", response);
     toast.add({ severity: 'success', summary: 'Reservation Confirmed', detail: 'You have successfully made a reservation!', life: 3000 });
   } catch (error) {
-    console.error("Error during reservation:", error);
     toast.add({ severity: 'error', summary: 'Reservation Failed', detail: 'There was an error processing your reservation.', life: 3000 });
   }
 };
