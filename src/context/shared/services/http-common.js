@@ -2,7 +2,7 @@ import axios from "axios";
 import {authenticationInterceptor} from "../../iam/services/authentication.interceptor.js";
 import {rentInterceptor} from "@/context/BikeRent/services/rent.interceptor.js";
 
-const API_BASE_URL = 'https://bizebreeze-ane4hwhdd6adhydr.canadacentral-01.azurewebsites.net/';
+const API_BASE_URL = 'http://localhost:5108';
 
 const http = axios.create({
     baseURL: API_BASE_URL,
