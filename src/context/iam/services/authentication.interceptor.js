@@ -1,11 +1,10 @@
-import {useAuthenticationStore} from "./authentication.store.js";
+import { useAuthenticationStore } from "./authentication.store.js";
 
 export const authenticationInterceptor = (config) => {
     const authenticationStore = useAuthenticationStore();
-    const isSignedIn = authenticationStore.isSignedIn;
-    if (isSignedIn) {
-        config.headers.Authorization = `Bearer ${authenticationStore.currentToken}`;
-        console.log(config);
+    const token = authenticationStore.currentToken;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-}
+};

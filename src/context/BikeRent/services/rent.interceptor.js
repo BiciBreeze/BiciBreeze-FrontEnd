@@ -8,13 +8,12 @@ import { useAuthenticationStore } from "../../iam/services/authentication.store.
  * @param config - The Axios request configuration
  * @returns {Promise<AxiosRequestConfig>}
  */
-export const rentInterceptor = async (config) => {
-    const authenticationStore = useAuthenticationStore();
-    const token = authenticationStore.token;
 
+export const rentInterceptor = (config) => {
+    const authenticationStore = useAuthenticationStore();
+    const token = authenticationStore.currentToken;
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
 };
