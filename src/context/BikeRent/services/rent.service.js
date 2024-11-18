@@ -1,8 +1,12 @@
 import http from "../../shared/services/http-common.js";
 
 class RentService {
-    createRental(rentalRequest) {
-        return http.post('api/rental', rentalRequest);
+    createRental(rentalRequest, token) {
+        return http.post('api/rental', rentalRequest, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
     }
 }
 
