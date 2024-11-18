@@ -3,9 +3,9 @@ import Home from './layouts/home.vue';
 import RentBike from "@/context/BikeRent/components/RentBike.vue";
 import LoginForm from './context/Registration/components/login-form.component.vue';
 import RegisterForm from './context/Registration/components/register-form.component.vue';
-import Subscription from './context/Subscription/components/subscription.vue';
+import Subscription from "@/context/Subscription/components/subscription.vue";
 import UserProfile from './context/user-profile/components/userProfile.vue';
-import Config from 'src/layouts/config.vue';
+import Config from "@/layouts/Config.vue";
 import {authenticationGuard} from "@/context/iam/services/authentication.guard.js";
 
 const routes = [
