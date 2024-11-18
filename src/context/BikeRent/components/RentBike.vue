@@ -168,8 +168,8 @@ const handleSubmit = async () => {
   const rentalRequest = new RentalRequest(
       bikeType.value,
       pickupDate.value,
-      pickupTime.value,
       dropoffDate.value,
+      pickupTime.value,
       dropoffTime.value,
       phoneNumber.value
   );
