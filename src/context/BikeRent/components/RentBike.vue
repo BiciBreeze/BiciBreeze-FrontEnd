@@ -42,14 +42,12 @@
           <pv-Dropdown id="bike-type" v-model="bikeType" :options="bikeTypes" optionLabel="label" placeholder="Select bike type" class="w-full">
             <template #value="slotProps">
               <div v-if="slotProps.value" class="flex items-center">
-                <img :src="slotProps.value.image" :alt="slotProps.value.label" class="w-10 h-10 mr-2 rounded" />
                 {{ slotProps.value.label }}
               </div>
               <span v-else>Select bike type</span>
             </template>
             <template #option="slotProps">
               <div class="flex items-center">
-                <img :src="slotProps.option.image" :alt="slotProps.option.label" class="w-10 h-10 mr-2 rounded" />
                 {{ slotProps.option.label }}
               </div>
             </template>
@@ -135,10 +133,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import Locations from "@/context/BikeRent/components/Locations.vue";
-import Dialog from 'primevue/dialog';
-import RentalPolicies from "@/context/BikeRent/components/RentalPolicies.vue";
-import OperatingHours from "@/context/BikeRent/components/OperatingHours.vue";
+import RentService from '@/context/BikeRent/services/rent.service.js';
+import { RentalRequest } from '@/context/BikeRent/model/rental.request.js';
 
 const toast = useToast();
 const showPolicies = ref(false);
@@ -147,10 +143,10 @@ const showLocations = ref(false);
 
 // Options for bike types
 const bikeTypes = [
-  { value: 'city', label: 'City Bike', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa4MLRK96sNj58jTx28M5lZNuM8hzx2d9lhg&s' },
-  { value: 'mountain', label: 'Mountain Bike', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt59oECrIaXc7A8A8QUjuAUWvsxU0XxqgMnQ&s' },
-  { value: 'road', label: 'Road Bike', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlozsOH5JB-GGDGNsfPkvDc9jxESzz-KHQRw&s' },
-  { value: 'electric', label: 'Electric Bike', image: 'https://i5.walmartimages.com/seo/COLORWAY-Electric-Bike-500W-8-4Ah-36V-Removable-Battery-E-Bike-Electric-Foldable-Pedal-Assist-E-Bicycle-19-9MPH-Bicycle-for-Teenager-and-Adults-BK5M_80bfc9d9-1b38-4ff4-912b-5655674dd60c.81525d87dd8e1ba37688be7188a9e527.jpeg' }
+  { value: 'electric', label: 'Electric Bike' },
+  { value: 'mountain', label: 'Mountain Bike' },
+  { value: 'urban', label: 'Urban Bike' },
+  { value: 'road', label: 'Road Bike' }
 ];
 
 // Options for time slots
@@ -168,8 +164,32 @@ const dropoffTime = ref(null);
 const phoneNumber = ref('');
 
 // Handle form submission
-const handleSubmit = () => {
-  toast.add({ severity: 'success', summary: 'Reservation Confirmed', detail: 'Your bike has been reserved successfully!', life: 3000 });
+const handleSubmit = async () => {
+  console.log("Form submitted");
+  if (!bikeType.value || !pickupDate.value || !pickupTime.value || !dropoffDate.value || !dropoffTime.value) {
+    toast.add({ severity: 'error', summary: 'Invalid Input', detail: 'Please select valid bike type, dates, and times.', life: 3000 });
+    return;
+  }
+
+  const rentalRequest = new RentalRequest(
+      bikeType.value,
+      pickupDate.value,
+      pickupTime.value,
+      dropoffDate.value,
+      dropoffTime.value,
+      phoneNumber.value
+  );
+
+  console.log("Rental request:", rentalRequest);
+
+  try {
+    const response = await RentService.createRental(rentalRequest);
+    console.log("Response:", response);
+    toast.add({ severity: 'success', summary: 'Reservation Confirmed', detail: 'You have successfully made a reservation!', life: 3000 });
+  } catch (error) {
+    console.error("Error during reservation:", error);
+    toast.add({ severity: 'error', summary: 'Reservation Failed', detail: 'There was an error processing your reservation.', life: 3000 });
+  }
 };
 </script>
 
